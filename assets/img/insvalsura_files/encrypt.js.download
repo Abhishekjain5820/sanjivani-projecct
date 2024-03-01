@@ -1,0 +1,45 @@
+(function($) {
+Drupal.behaviors.form_submit_processor = {
+  attach: function (context, settings) {
+    $("#user-login").removeClass();
+    $("#edit-submit").click(function(e) {      
+       /*Encrypt Login Password*/
+       GetEncrypt();
+    });
+    function GetEncrypt() {
+               
+		var pwd =  $('input#edit-pass');    
+               
+		if (pwd != null && pwd.value != '') { 
+                    
+			var enc1 = $.base64.encode(pwd.val());                                                      
+                        //alert(enc1);
+                        var ran1 = makeRandomString(10);
+			var ran2 = makeRandomString(10);
+			var newpass = ran1 + enc1 + ran2;                                   
+			pwd.val(newpass);
+                        
+		}
+                
+	}
+	function makeRandomString(maxlen)
+	{
+		if(maxlen === ''){ maxlen = 5;}
+		var text = "";
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		for( var i=0; i < maxlen; i++ )
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		return text;
+	}
+  }
+}
+ $("#newprimary_long").remove();
+})(jQuery);
+
+jQuery(document).ready(function(a){
+   // a("#newprimary_long").remove();
+   a("#newprimary_long").val('');
+    
+});

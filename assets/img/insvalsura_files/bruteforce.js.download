@@ -1,0 +1,15 @@
+jQuery(function($){
+    $.fn.burstCache = function()
+    {
+        var basePath = document.getElementById('basepath').value;
+        if (!navigator.onLine) 
+        {
+            // document.body.innerHTML = 'Loading...';
+            window.location = basePath+'/member';
+			//window.location = 'http://google.com';
+        }
+    };
+    
+    $(this).burstCache();
+});
+
