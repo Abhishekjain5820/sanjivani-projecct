@@ -23,15 +23,23 @@ const HeroSection = () => {
 
   const slides = [
     {
-      src: "assets/img/slider1.jpg",
+      src: "assets/img/inogration.jpg",
       alt: "First slide",
     },
     {
-      src: "assets/img/slider2.jpg",
+      src: "assets/img/women_empowerment.jpg",
       alt: "Second slide",
     },
     {
-      src: "assets/img/slider4.jpg",
+      src: "assets/img/navy.jpg",
+      alt: "Third slide",
+    },
+    {
+      src: "assets/img/summit.jpg",
+      alt: "Third slide",
+    },
+    {
+      src: "assets/img/val_lit_fest.jpg",
       alt: "Third slide",
     },
   ];
@@ -58,7 +66,12 @@ const HeroSection = () => {
             key={index}
             className={`carousel-item ${activeIndex === index ? "active" : ""}`}
           >
-            <img className="d-block w-100" src={slide.src} alt={slide.alt} />
+            <img
+              className="d-block w-100"
+              src={slide.src}
+              alt={slide.alt}
+              style={{ width: "1170px", height: "380px" }}
+            />
           </div>
         ))}
       </div>

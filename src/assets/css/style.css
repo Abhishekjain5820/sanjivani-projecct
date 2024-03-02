@@ -879,7 +879,7 @@ section {
 --------------------------------------------------------------*/
 .cta {
   background: linear-gradient(rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9)),
-    url("../img/cta-bg.jpg") fixed center center;
+    url(/assets/img/csd-logo.jpg) fixed center center;
   background-size: cover;
   padding: 120px 0;
 }
@@ -906,12 +906,14 @@ section {
   margin: 10px;
   border: 2px solid #fff;
   color: #fff;
+  border: 2px solid #47b2e4;
+  background: #47b2e4;
 }
 
-.cta .cta-btn:hover {
+/* .cta .cta-btn:hover {
   background: #47b2e4;
   border: 2px solid #47b2e4;
-}
+} */
 
 @media (max-width: 1024px) {
   .cta {

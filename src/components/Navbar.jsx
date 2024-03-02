@@ -15,6 +15,11 @@ const Navbar = () => {
                   About
                 </a>
               </li>
+              <li>
+                <a className="nav-link scrollto" href="#cta">
+                  Predicton
+                </a>
+              </li>
               {/* <li>
                 <a className="nav-link scrollto" href="#services">
                   Services

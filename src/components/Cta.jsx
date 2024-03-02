@@ -8,7 +8,16 @@ const Cta = () => {
   };
 
   return (
-    <section id="cta" className="cta">
+    <section
+      id="cta"
+      className="cta"
+      style={{
+        background:
+          "linear-gradient(rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9)), url(/assets/img/csd-logo.jpg) fixed center center",
+        backgroundSize: "cover",
+        padding: "120px 0",
+      }}
+    >
       <div className="container" data-aos="zoom-in">
         <div className="row">
           <div className="col-lg-9 text-center text-lg-start">
@@ -19,7 +28,11 @@ const Cta = () => {
             </p>
           </div>
           <div className="col-lg-3 cta-btn-container text-center">
-            <button className="cta-btn align-middle" onClick={handleShowTable}>
+            <button
+              className="cta-btn align-middle"
+              onClick={handleShowTable}
+              style={{ border: "2px solid #47b2e4", background: "#47b2e4" }}
+            >
               Show Prediction Table
             </button>
           </div>
