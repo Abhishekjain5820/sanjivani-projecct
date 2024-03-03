@@ -1,17 +1,11 @@
-import AboutUs from "./components/AboutUs";
-import Cta from "./components/Cta";
-import Faq from "./components/Faq";
+import AllProducts from "./components/AllProducts";
 import Footer from "./components/Footer";
-import HeroSection from "./components/HeroSection";
+import Home from "./components/Home";
 import InnerContainer from "./components/InnerContainer";
 import Navbar from "./components/Navbar";
 import OuterContainer from "./components/OuterContainer";
-
-import Services from "./components/Services";
-import Skills from "./components/Skills";
 import UpperNavbar from "./components/UpperNavbar";
-import WhyUs from "./components/WhyUs";
-
+import {Routes,Route} from 'react-router-dom'
 function App() {
   return (
     <>
@@ -19,13 +13,10 @@ function App() {
         <InnerContainer>
           <UpperNavbar />
           <Navbar />
-          <HeroSection />
-          <AboutUs />
-          <WhyUs />
-          <Skills />
-          <Services />
-          <Cta />
-          <Faq />
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/products" element={<AllProducts/>}/>
+          </Routes>
           <Footer />
         </InnerContainer>
       </OuterContainer>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
@@ -20,6 +21,11 @@ const Navbar = () => {
                   Predicton
                 </a>
               </li>
+              <li>
+                <Link className="nav-link scrollto" to="/products">
+                  Products
+                </Link>
+              </li>
               {/* <li>
                 <a className="nav-link scrollto" href="#services">
                   Services
@@ -35,7 +41,6 @@ const Navbar = () => {
                   Team
                 </a>
               </li>
-
               <li>
                 <a className="nav-link scrollto" href="#contact">
                   Contact

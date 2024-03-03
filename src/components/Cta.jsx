@@ -13,7 +13,7 @@ const Cta = () => {
       className="cta"
       style={{
         background:
-          "linear-gradient(rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9)), url(/assets/img/csd-logo.jpg) fixed center center",
+          "linear-gradient(rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9)), url(/assets/img/supermarket.jpg) fixed center center",
         backgroundSize: "cover",
         padding: "120px 0",
       }}
@@ -21,7 +21,7 @@ const Cta = () => {
       <div className="container" data-aos="zoom-in">
         <div className="row">
           <div className="col-lg-9 text-center text-lg-start">
-            <h3>Grocery Prediction</h3>
+            <h3>CSD INVENTORY PREDICTION</h3>
             <p>
               Get insights into grocery trends and predictions to optimize stock
               management and customer satisfaction.
