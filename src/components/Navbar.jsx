@@ -7,11 +7,11 @@ const Navbar = () => {
           <nav id="navbar" className="navbar">
             <ul>
               <li>
-                <a className="nav-link scrollto active" href="#hero">
+                <Link className="nav-link scrollto active" to="/">
                   Home
-                </a>
+                </Link>
               </li>
-              <li>
+              {/* <li>
                 <a className="nav-link scrollto" href="#about">
                   About
                 </a>
@@ -20,7 +20,7 @@ const Navbar = () => {
                 <a className="nav-link scrollto" href="#cta">
                   Predicton
                 </a>
-              </li>
+              </li> */}
               <li>
                 <Link className="nav-link scrollto" to="/products">
                   Products

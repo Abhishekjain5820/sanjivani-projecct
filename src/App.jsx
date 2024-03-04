@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import InnerContainer from "./components/InnerContainer";
 import Navbar from "./components/Navbar";
 import OuterContainer from "./components/OuterContainer";
+import ProductPredictionPage from "./components/ProductPredictionPage";
 import UpperNavbar from "./components/UpperNavbar";
 import {Routes,Route} from 'react-router-dom'
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/products" element={<AllProducts/>}/>
+            <Route path="/products/:pluno" element={<ProductPredictionPage/>}/>
           </Routes>
           <Footer />
         </InnerContainer>

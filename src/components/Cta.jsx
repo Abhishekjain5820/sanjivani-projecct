@@ -1,10 +1,48 @@
+import axios from "axios";
 import { useState } from "react";
 
 const Cta = () => {
   const [showTable, setShowTable] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [predictedDemand, setPredictedDemand] = useState(null);
+
+  const monthMap = {
+    January: "1",
+    February: "2",
+    March: "3",
+    April: "4",
+    May: "5",
+    June: "6",
+    July: "7",
+    August: "8", // Corrected spelling of August
+    September: "9", // Corrected spelling of September
+    October: "10",
+    November: "11",
+    December: "12", // Corrected spelling of December
+    // Add other months as needed
+  };
 
   const handleShowTable = () => {
     setShowTable(!showTable);
+  };
+
+  const handleChangeMonth = (event) => {
+    setSelectedMonth(event.target.value);
+    console.log(selectedMonth);
+  };
+
+  const handleFetchPrediction = () => {
+    // Make an API request to fetch prediction using selectedMonth
+    axios
+      .post("/api/prediction", { month: selectedMonth })
+      .then((response) => {
+        // Handle the response
+        setPredictedDemand(response.data.predictedDemand);
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("Error fetching prediction:", error);
+      });
   };
 
   return (
@@ -40,28 +78,33 @@ const Cta = () => {
         {showTable && (
           <div className="row mt-4">
             <div className="col">
-              {/* Insert your table component here */}
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Predicted Demand</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Product 1</td>
-
-                    <td>120</td>
-                  </tr>
-                  <tr>
-                    <td>Product 2</td>
-
-                    <td>90</td>
-                  </tr>
-                  {/* Add more rows as needed */}
-                </tbody>
-              </table>
+              <div className="mb-3">
+                <label htmlFor="monthSelect" className="form-label">
+                  Select Month:
+                </label>
+                <select
+                  className="form-select"
+                  id="monthSelect"
+                  value={selectedMonth}
+                  onChange={handleChangeMonth}
+                >
+                  <option value="">Select Month</option>
+                  {Object.keys(monthMap).map((month) => (
+                    <option key={month} value={monthMap[month]}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button
+                className="btn btn-primary"
+                onClick={handleFetchPrediction}
+              >
+                Fetch Prediction
+              </button>
+              {predictedDemand !== null && (
+                <p>Predicted Demand: {predictedDemand}</p>
+              )}
             </div>
           </div>
         )}

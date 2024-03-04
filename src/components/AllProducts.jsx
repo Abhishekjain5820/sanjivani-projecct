@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom';
+
 function AllProducts() {
   const [products, setProducts] = useState([]);
   const [productCount, setProductCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0); // Start currentPage from 0
+  const [currentPage, setCurrentPage] = useState(0);
   const [error, setError] = useState(null);
-  const itemsPerPage = 10; // Number of items to display per page
+  const [prediction, setPrediction] = useState(0);
+  const [showPrediction, setShowPrediction] = useState(false);
+  const itemsPerPage = 10;
   const navigate = useNavigate();
 
   const fetchProducts = async (page) => {
     try {
-      const limit = itemsPerPage; // Set limit to itemsPerPage
-      const offset = page * itemsPerPage; // Calculate offset based on page number and itemsPerPage
+      const limit = itemsPerPage;
+      const offset = page * itemsPerPage;
       const response = await axios.get("http://127.0.0.1:8000/inventory", {
         params: {
           limit: limit,
@@ -25,27 +28,40 @@ function AllProducts() {
       console.error("Error fetching products:", error);
     }
   };
+
   const fetchProductCount = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/all_inventory");
-      setProductCount(response.data.length); // Calculate the length of the products list
+      setProductCount(response.data.length);
     } catch (error) {
       setError("Failed to fetch product count");
       console.error("Error fetching product count:", error);
     }
   };
-  //console.log(currentPage)
+
   useEffect(() => {
     fetchProducts(currentPage);
     fetchProductCount();
   }, [currentPage]);
 
-  const handleViewMore = (productId) => {
-    navigate(`/product/${productId}`);
+  const handlePrediction = async (productId) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/prediction/${productId}`
+      );
+      setPrediction(response.data.prediction);
+      setShowPrediction(true);
+    } catch (error) {
+      setError("Failed to fetch prediction");
+      console.error("Error fetching prediction:", error);
+    }
+  };
+
+  const handleClick = async (productId) => {
+    navigate(`/products/${productId}`);
   };
 
   const totalPages = Math.ceil(productCount / itemsPerPage);
-  console.log(productCount);
 
   return (
     <div className="container">
@@ -63,7 +79,7 @@ function AllProducts() {
             <th>Net Quantity</th>
             <th>Opening Stock</th>
             <th>Closing Stock</th>
-            {/* <th>Action</th> */}
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -78,14 +94,14 @@ function AllProducts() {
               <td>{product.net_qty}</td>
               <td>{product.opening_stock}</td>
               <td>{product.closing_stock}</td>
-              {/* <td>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => handleViewMore(product.id)}
-                >
-                  View More
-                </button>
-              </td> */}
+              <td>
+                <Link to={`/products/${product.pluno}`}>
+                  <button className="btn btn-primary">
+                    Prediction
+                  </button>
+                </Link>
+              </td>
+              <td>{showPrediction && prediction}</td> {/* Display prediction when showPrediction is true */}
             </tr>
           ))}
         </tbody>
