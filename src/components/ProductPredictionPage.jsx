@@ -11,10 +11,10 @@ function ProductPredictionPage() {
     const fetchPrediction = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/prediction/${pluno}`
+          `http://localhost:8000/predict/pluno/1006/April`
         );
-        setPrediction(response.data.prediction);
-        console.log(prediction)
+        //setPrediction(response.data.prediction);
+        console.log(response)
       } catch (error) {
         setError("Prediction not found");
         console.error("Error fetching prediction:", error);

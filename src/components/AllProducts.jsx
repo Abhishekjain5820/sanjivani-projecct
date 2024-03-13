@@ -23,6 +23,7 @@ function AllProducts() {
         },
       });
       setProducts(response.data);
+      console.log(response.data)
     } catch (error) {
       setError("Failed to fetch products");
       console.error("Error fetching products:", error);

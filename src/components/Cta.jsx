@@ -1,11 +1,21 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Cta = () => {
   const [showTable, setShowTable] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [predictedDemand, setPredictedDemand] = useState(null);
+  const [data,setData]=useState([])
+   
 
+  const fetchProduct=async()=>{
+    const response=await axios.get("http://127.0.0.1:8000/predict/April")
+    console.log(response.data)
+  }
+  useEffect(()=>{
+   fetchProduct()
+  },[])
+ 
   const monthMap = {
     January: "1",
     February: "2",
@@ -14,13 +24,18 @@ const Cta = () => {
     May: "5",
     June: "6",
     July: "7",
-    August: "8", // Corrected spelling of August
-    September: "9", // Corrected spelling of September
+    August: "8",
+    September: "9",
     October: "10",
     November: "11",
-    December: "12", // Corrected spelling of December
-    // Add other months as needed
+    December: "12",
   };
+
+  const monthOptions = Object.keys(monthMap).map((month) => (
+    <option key={month} value={month}>
+      {month}
+    </option>
+  ));
 
   const handleShowTable = () => {
     setShowTable(!showTable);
@@ -28,19 +43,18 @@ const Cta = () => {
 
   const handleChangeMonth = (event) => {
     setSelectedMonth(event.target.value);
-    console.log(selectedMonth);
   };
-
   const handleFetchPrediction = () => {
-    // Make an API request to fetch prediction using selectedMonth
+    const monthNumber = monthMap[selectedMonth]; // Get the mapped number directly
+    console.log(monthNumber)
+
+    // Make the API request with the month number
     axios
-      .post("/api/prediction", { month: selectedMonth })
+      .post("/api/prediction", { monthNumber })
       .then((response) => {
-        // Handle the response
         setPredictedDemand(response.data.predictedDemand);
       })
       .catch((error) => {
-        // Handle errors
         console.error("Error fetching prediction:", error);
       });
   };
@@ -89,11 +103,7 @@ const Cta = () => {
                   onChange={handleChangeMonth}
                 >
                   <option value="">Select Month</option>
-                  {Object.keys(monthMap).map((month) => (
-                    <option key={month} value={monthMap[month]}>
-                      {month}
-                    </option>
-                  ))}
+                  {monthOptions}
                 </select>
               </div>
               <button
